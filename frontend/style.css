@@ -1,0 +1,5 @@
+body{ font-family:system-ui,Arial; background:#f4f6fb; padding:24px; }
+.card{ max-width:560px; margin:0 auto; background:white; padding:18px; border-radius:10px; box-shadow:0 8px 24px rgba(12,20,40,0.06); }
+input, textarea{ width:100%; padding:8px; margin:6px 0 12px; border-radius:6px; border:1px solid #e6e9ef }
+button{ background:#0b63ff; color:white; padding:8px 12px; border-radius:8px; border:none; cursor:pointer }
+.output{ margin-top:12px; padding:12px; background:#fafafa; border-radius:8px }

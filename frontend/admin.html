@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Admin - Add Result</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<main class="card">
+<h1>Admin - Add / Update Result</h1>
+<label>Index number</label>
+<input id="index" />
+<label>PIN</label>
+<input id="pin" />
+<label>Name</label>
+<input id="name" />
+<label>Grades (JSON)</label>
+<textarea id="grades" placeholder='{"Math":"A","Eng":"B"}'></textarea>
+<button id="save">Save Result</button>
+<div id="status"></div>
+</main>
+<script>
+document.getElementById('save').onclick = async () => {
+const index = document.getElementById('index').value.trim();
+const pin = document.getElementById('pin').value.trim();
+const name = document.getElementById('name').value.trim();
+let grades;
+try { grades = JSON.parse(document.getElementById('grades').value); } catch(e) { return alert('Grades must be valid JSON'); }
+const resp = await fetch('/admin/result', { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify({ indexNumber:index, pin, name, grades }) });
+const j = await resp.json();
+document.getElementById('status').innerText = JSON.stringify(j);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result-backend
+  namespace: results
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: result-backend
+  template:
+    metadata:
+      labels:
+        app: result-backend
+    spec:
+      containers:
+        - name: backend
+          image: roobobo/result-checker-backend:v3
+          env:
+            - name: MONGO_URL
+              value: "mongodb://mongo:27017"
+            - name: MONGO_DB
+              value: "resultsdb"
+          ports:
+            - containerPort: 3000

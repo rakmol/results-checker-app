@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result-frontend
+  namespace: results
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: result-frontend
+  template:
+    metadata:
+      labels:
+        app: result-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: roobobo/result-checker-frontend:v3
+          ports:
+            - containerPort: 8080
