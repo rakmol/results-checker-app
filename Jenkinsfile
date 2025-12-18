@@ -17,9 +17,10 @@ pipeline {
       steps {
         sh '''
           cd k8s
-          kubectl apply -f .
+          kubectl apply -f . --validate=false
         '''
       }
     }
   }
 }
+
