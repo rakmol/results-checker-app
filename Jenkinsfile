@@ -1,26 +1,15 @@
 pipeline {
-  agent any
+    agent any
 
-  environment {
-    KUBECONFIG = "/var/jenkins_home/.kube/config"
-  }
-
-  stages {
-
-    stage('Clone Repo') {
-      steps {
-        git branch: 'main', url: 'https://github.com/rakmol/results-checker-app.git'
-      }
+    stages {
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh '''
+                echo "Deploying to Kubernetes..."
+                kubectl get nodes
+                kubectl apply -f k8s/ --validate=false
+                '''
+            }
+        }
     }
-
-    stage('Deploy to Kubernetes') {
-      steps {
-        sh '''
-          cd k8s
-          kubectl apply -f . --validate=false
-        '''
-      }
-    }
-  }
 }
-
